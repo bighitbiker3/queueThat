@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html  ng-app="MyApp">
+  <head>
+    <meta charset="UTF-8">
+    <title>SC Queue Working on Desktop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Raleway:200,300,100'>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    
+  </head>
+
+  <body>
+
+    <!--<div class="wrapper">
+  <div class="full-height">
+    <div class="background">
+      <div class="homeContent">
+        <h1>Soundcloud Queue</h1>
+        <a href="#queueApp" class="toQueue btn btn-primary btn-warning" role="button">Go To Queue</a>
+        <div class="footer">
+          <p>Made With Coffee and Curry By Elliott McNary</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!--<nav class="visible-xs visible-sm navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsed" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+    </div>
+    <div class="collapse navbar-collapse" id="collapsed">
+      <ul class="nav navbar-nav">
+        <li><a href="#trackList">Tracks</a></li>
+        <li><a href="#queueList">Queue</a></li>
+        <li>
+        <input name="userSearch" type="text" class="form-control " placeholder=" SC.com/*PUT THIS PART IN THE SEARCH*">
+      </input>
+      <button class="btn getTracks" id="tracks">Tracks :)</button>
+      <button class="btn getFavorites" id="favorites">Favorites :)</button>
+      <button class="btn clearQueue" id="clearQueue">Clear My Queue</button>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>-->
+
+<div class="col-med-4 logoBar">
+  <h1>Soundcloud Queue</h1>
+  <p class="visible-xs visible-sm"> Mobile Coming Soon Fam</p>
+</div>
+<div class="col-md-4 search visible-md visible-lg">
+  <input id="searchBar" name="userSearch" type="search" class="form-control " placeholder=" SC.com/*PUT THIS PART IN THE SEARCH*">
+  </input>
+  <button class="btn getTracks" id="tracks">Tracks :)</button>
+  <button class="btn getFavorites" id="favorites">Favorites :)</button>
+  <button class="btn connectSoundcloud">Connect w/ SC :)</button>
+  
+</div>
+<div class="col-md-4 artistFeed visible-md visible-lg">
+  <h3 id="artistFeedName">Live Searches</h3><h1>
+</div>
+<div id="queueApp" class="visible-md visible-lg queueApp wrapper">
+  <div class="row col-md-12">
+    <div class="col-md-4 pages">
+      <h1>The Tunes, Fam</h1>
+      <span class="prev">
+      <i class="prevPage fa fa-angle-double-left"></i>
+      <p class="prevPage">Previous Page</p>
+      </span>
+      <span class="next">
+      <p class="nextPage">Next Page</p>
+      <i class="nextPage fa fa-angle-double-right"></i>
+      </span>
+
+
+    </div>
+    <div class="col-md-4 pages">
+      <div class="buttonChoices">
+        <center>
+          <button id="top10Button" class='btn'>Top 10</button>
+          <button id="feedButton" class='btn'>Live Feed</button>
+          <button id="random20Button" class='btn'>Random 20</button>
+        </center>
+      </div>
+      <form>
+        <div class="checkbox hideThing">
+          <input type="checkbox" id="mixesOkay"> <p>Mixes are okay</p></input>     
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4 pages ">
+      <span class=queuePages>
+      <h1>Queue (It's Pretty Lit)</h1><button class="btn clearQueue" id="clearQueue">X</button>
+            <span>
+    </div>
+    
+  </div>
+  <div id="trackList" class="trackList col-md-4">
+    <h1 class="introTitle">Directions</h1>
+    <p class ="intro">
+    Here's how it works:
+      <br>
+      <br>
+      1. Put the end of any Soundcloud permalink you want in the search box above. For example, if the artist is http://soundcloud.com/duvetcover you'd put duvetcover in the search.
+      <br>
+      <br>
+      2. Pressing enter brings up that artists <strong>favorited</strong> tracks. If you want the tracks they've posted, click the Tracks :) button.  
+      <br>
+      <br>
+      3. If you put in a valid search, the box will turn green and you won't see this anymore. Instead you'll see a list of tracks. It shows 200 results. If there are more, hit Next Page.
+      <br>
+      <br>
+      4. Click a track to add it to your queue, you can move it up and down or delete it from the queue. Just hover over it with your mouse. Enjoy :)))))
+      <br>
+      <br>
+      Made with Coffee and Curry by Elliott McNary at his battle station.
+    </p>
+    <img class="introImg img-responsive" src="https://dl.dropboxusercontent.com/s/46xjg5p88xxq5f6/fat_me.JPG?dl=0"/>
+      
+    <!--<div class='track'>
+      <img src="https://i1.sndcdn.com/artworks-000134901706-qotldu-large.jpg" />
+      <p class='artistName'>DJ Carnage</p>
+      <br>
+      <h1 class="titleName">November Skies</h1>
+      <br>
+      <p class = "duration">
+        3:10
+      </p>
+
+    </div>-->
+  </div>
+  <div class="col-md-4 player" id="nowplaying">
+      <div class="controls play glyphicon glyphicon-play"></div>
+      <div class="controls pause glyphicon glyphicon-pause"></div>
+
+      <div class="controls backward glyphicon glyphicon-backward"></div>
+      <div class="controls forward glyphicon glyphicon-forward"></div>
+      <div class="controls playerText">
+        <3 COFFEE IS FUN :)!!!</div>
+      </div>
+    <iframe class="player hideThing" src="//w.soundcloud.com/player/?url=//soundcloud.com/"></iframe>
+
+    
+      <div id="top10Tracks" class="middleColumn col-md-4">
+      </div>
+      <div id="queueFeedTracks" class="middleColumn col-md-4" ng-controller="FeedCtrl">
+        <!-- Do shit for angular feed here -->
+            <!-- <div ng-repeat="post in posts" class='track' id='{{post.songId}}'><img class='imgclass' src='{{post.songImg}}'/><p class='artistName'>{{post.artistName}}</p><br><h1 class='titleName'>{{post.titleName}}</h1><br><p class='duration'></p></div> -->
+      </div>
+      <div id="random20Tracks" class="middleColumn col-md-4">
+          <div class='randomTrack' id='trap'>
+            <br>
+            <h1>TRVP</h1>
+            <br>
+
+          </div>
+          <div class='randomTrack' id='deephouse'>
+            <br>
+            <h1>Vun Deeper (House)</h1>
+            <br>
+
+          </div>
+                <div class='randomTrack' id='dubstep'>
+            <br>
+            <h1>Wompy</h1>
+            <br>
+
+          </div>
+                <div class='randomTrack' id='electro'>
+            <br>
+            <h1>Electro House</h1>
+            <br>
+
+          </div>
+          <div class='randomTrack' id='progressive'>
+            <br>
+            <h1>Progressive House</h1>
+            <br>
+
+          </div>
+          <div class='randomTrack' id='trance'>
+            <br>
+            <h1>TRVNCE</h1>
+            <br>
+
+          </div>
+      </div>
+    
+    <div id="queueList" class="queueListDiv col-md-4">
+      
+      <div class='track' id='test'>
+        
+        <span class="soundHover">
+        <div class="soundMove">
+        <i class="moveUp fa fa-arrow-up"></i>
+        <i class="moveDown fa fa-arrow-down"></i> 
+          </div>
+                  <span class="deleteQueue">  
+        <i class="fa fa-times"></i>
+      </span>
+      <span class='likeSound'><i class='fa fa-heart-o'></i></span>
+      </span>
+
+      <img src="https://i1.sndcdn.com/artworks-000134901706-qotldu-large.jpg" />
+
+
+      <p class="artistName">DJ Carnage</p>
+      <br>
+      <h1 class="titleName">November Skies</h1>
+
+      <br>
+
+    </div>
+  </div>
+
+</div>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+    <script type="text/javascript" src="/javascripts/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="/javascripts/angularApp.js"></script>
+    <script src='https://connect.soundcloud.com/sdk/sdk-3.0.0.js'></script>
+    <script src='https://w.soundcloud.com/player/api.js'></script>
+    <script src='http://www.waveformjs.org/waveform.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+
+
+    
+    
+    
+  </body>
+</html>
