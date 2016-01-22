@@ -86,7 +86,7 @@ passport.serializeUser(function(user, done) {
 passport.use(new SoundCloudStrategy({
     clientID: SOUNDCLOUD_CLIENT_ID,
     clientSecret: SOUNDCLOUD_CLIENT_SECRET,
-    callbackURL: "http://www.queuethat.com/auth/soundcloud/callback.html"
+    callbackURL: "http://www.queuethat.com/auth/soundcloud/callback"
   },
   function(accessToken, refreshToken, profile, done) {
 
