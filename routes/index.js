@@ -5,8 +5,8 @@ var passport = require('passport');
 var SoundCloudStrategy = require('passport-soundcloud').Strategy;
 var User = require('../models/user');
 
-var SOUNDCLOUD_CLIENT_ID = '819c776ce6c1d80e0b0f7c04f19ffdb5'
-var SOUNDCLOUD_CLIENT_SECRET = '8810c79a556f417bf050ba8c1472a108';
+var SOUNDCLOUD_CLIENT_ID = 'a6595fb89abff0688302e47c4d1e9f7a'
+var SOUNDCLOUD_CLIENT_SECRET = '0129ad1775accc4be2c3dd9feea89e1a';
 
 //SC Try
 

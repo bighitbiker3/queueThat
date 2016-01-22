@@ -13,7 +13,7 @@ $(document).ready(function() {
   var currentIndex = 0;
   var username = "";
   var subSection = "";
-  var clientID = "819c776ce6c1d80e0b0f7c04f19ffdb5";
+  var clientID = "a6595fb89abff0688302e47c4d1e9f7a";
   var limit = "&limit=200";
   var apiurl = "";
   var pages = [];
@@ -81,7 +81,7 @@ setInterval(addToQueue, 1000);
   //START SC 
 
   SC.initialize({
-    client_id: '819c776ce6c1d80e0b0f7c04f19ffdb5'
+    client_id: 'a6595fb89abff0688302e47c4d1e9f7a'
 
   });
 
