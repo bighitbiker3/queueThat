@@ -444,7 +444,7 @@ function allowLike(){
       songId = thisDiv.data("songid");
 
       $.ajax({
-            url: 'https://api.soundcloud.com/me/favorites/' + songId + '?oauth_token=' + token,
+            url: 'https://api.soundcloud.com/me/favorites/' + songId + '?oauth_token=' + token + '&callback=jsonpResponse',
             type: 'PUT',
             success: function(result) {
               thisDiv.closest('.likeSound').addClass('soundLiked');

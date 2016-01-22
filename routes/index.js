@@ -61,7 +61,7 @@ router.get('/auth/soundcloud',
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 router.get('/auth/soundcloud/callback', 
-  passport.authenticate('soundcloud', { failureRedirect: '/login' }),
+  passport.authenticate('soundcloud', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/after-auth.html');
   });
