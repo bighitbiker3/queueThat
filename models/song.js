@@ -6,6 +6,7 @@ var songSchema = new Schema({
 	titleName: String,
 	songId: Number,
 	songImg: String,
+	duration: String,
 	queueTimes: {
 		type: Number,
 		default: 1

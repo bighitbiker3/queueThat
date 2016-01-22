@@ -227,7 +227,7 @@ iframe {
 .titleName {
   position:absolute;
   float: left;  
-  margin-top: 10px;
+  margin-top: 8px;
   margin-left: 80px;
   font-size: 1.5em;
 }
@@ -236,6 +236,13 @@ iframe {
   margin-top: 5px;
   margin-left: 5px;
   font-size: 0.8em;
+}
+.top10Rating{
+  position: absolute;
+  margin-left: 80px;
+  margin-top: 40px;
+  font-size: 0.8em;
+  float: left;
 }
 .track i {
   margin-top: 8px;

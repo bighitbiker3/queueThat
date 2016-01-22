@@ -29,7 +29,8 @@ var addToQueue = function(){
           "artistName": thisDiv.find(".artistName").text(),
           "titleName": thisDiv.find(".titleName").text(),
           "songId": parseInt(thisDiv.attr('id'), 10),
-          "songImg": thisDiv.children('img').attr('src') 
+          "songImg": thisDiv.children('img').attr('src'),
+          "duration": thisDiv.find('.duration').text() 
         });
 
         //API Post Function
@@ -37,7 +38,8 @@ var addToQueue = function(){
           "artistName": thisDiv.find(".artistName").text(),
           "titleName": thisDiv.find(".titleName").text(),
           "songId": this.id,
-          "songImg": thisDiv.children('img').attr('src')
+          "songImg": thisDiv.children('img').attr('src'),
+          "duration": thisDiv.find('.duration').text(),
         });
         if (queueList.length == 0) {
           queueList.push(this.id);
@@ -54,6 +56,7 @@ var addToQueue = function(){
         cloned.attr("id", queueList.length - 1);
         $("<span class = 'soundHover'><div class='soundMove'><i class='moveUp fa fa-arrow-up'></i><i class='moveDown fa fa-arrow-down'></div></i><span class='deleteQueue'><i class='fa fa-times'></i></span><span data-songid='" + songId + "' class='likeSound'><i class='fa fa-heart-o'></i></span></span>").prependTo(cloned);
         $(cloned).appendTo(".queueListDiv").addClass("animated flipInX, queueTrack").removeClass('track');
+        $(cloned).find('.top10Rating').html('')
 
         deleteFromQueue();
         moveItUp();
@@ -594,12 +597,16 @@ var top10TitleList = [];
 var top10ArtistList = [];
 var top10ImgList = [];
 var top10IdList = [];
+var top10RatingList = [];
+var top10DurationList = [];
 
 function clearTop10(){
   top10TitleList.length = 0;
   top10ArtistList.length = 0;
   top10ImgList.length = 0;
   top10IdList.length = 0;
+  top10RatingList.length = 0;
+  top10DurationList.length = 0;
   $('#top10Tracks').html('');
 }
 
@@ -622,13 +629,15 @@ $('#top10Button').off('click').on('click', function(){
       top10ArtistList.push(data[prop].artistName);
       top10IdList.push(data[prop].songId);
       top10ImgList.push(data[prop].songImg);
+      top10RatingList.push(data[prop].queueTimes);
+      top10DurationList.push(data[prop].duration);
     }
     console.log(top10ArtistList);
 
   }).success(function(){
       console.log("getJSON Success")
       for(var i = 0; i < top10ArtistList.length; i++){
-        $("<div class='track' id='" + top10IdList[i] + "'><img class='imgclass' src='" + top10ImgList[i] + "'/>" + "<p class='artistName'>" + top10ArtistList[i] + "</p>" + "<br><h1 class='titleName'>" + top10TitleList[i] + "</h1><br><p class='duration'></p></div>").appendTo("#top10Tracks");
+        $("<div class='track' id='" + top10IdList[i] + "'><img class='imgclass' src='" + top10ImgList[i] + "'/>" + "<p class='artistName'>" + top10ArtistList[i] + "</p>" + "<br><h1 class='titleName'>" + top10TitleList[i] + "</h1><p class='top10Rating'>Queued: " + top10RatingList[i] + " times</p><br><p class='duration'>" + top10DurationList[i] + "</p></div>").appendTo("#top10Tracks");
       };
       $('#top10Button').addClass("chosenButton")
       
@@ -639,7 +648,7 @@ $('#top10Button').off('click').on('click', function(){
 
 //FEED
 socket.on('song send', function(song){
-  $("<div class='track' id='" + song.songId + "'><img class='imgclass' src='" + song.songImg + "'/>" + "<p class='artistName'>" + song.artistName + "</p>" + "<br><h1 class='titleName'>" + song.titleName + "</h1><br><p class='duration'></p></div>").prependTo("#queueFeedTracks");
+  $("<div class='track' id='" + song.songId + "'><img class='imgclass' src='" + song.songImg + "'/>" + "<p class='artistName'>" + song.artistName + "</p>" + "<br><h1 class='titleName'>" + song.titleName + "</h1><br><p class='duration'>" + song.duration + "</p></div>").prependTo("#queueFeedTracks");
 });
 socket.on('artist send', function(artist){
   if($('#artistFeedName').html() == artist){

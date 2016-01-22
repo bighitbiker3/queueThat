@@ -14,6 +14,66 @@ router.get('/', function(req, res){
   res.render('index', { user: req.user });
 });
 
+router.get('/api', function (req, res) {
+  res.send('Song API is running');
+});
+router.get('/api/songsqueued', function (req, res) {
+  return Song.find(function(err, songs){
+    if(err){return err;}
+
+    else {res.send(songs)}
+  }).sort({lastQueued: -1})
+});
+
+router.get('/api/songsqueued/top10', function (req, res) {
+  return Song.find(function(err, songs){
+    if(err){return err;}
+
+    else {res.send(songs)}
+  }).sort({queueTimes: -1}).limit(10)
+});
+
+router.post('/api/songsqueued', function(req, res){
+    Song.findOneAndUpdate({songId: req.body.songId}, { $inc:{queueTimes: 1}, $currentDate:{lastQueued: true} },
+      function(err, song){
+        if (err) {
+            return console.log("Error: " + err)
+        }
+        if(song){
+            song.queueTimes += 1;
+
+            song.save(function(err){
+              if(err){
+                console.log(err)
+              } else {
+                console.log("updated fam")
+              }
+            });
+        } else {
+
+          var song = new Song();
+
+          song.artistName = req.body.artistName;
+          song.titleName = req.body.titleName;
+          song.songId = req.body.songId;
+          song.songImg = req.body.songImg;
+          song.duration = req.body.duration;
+
+
+          song.save(function(err) {
+            if (err) {
+              console.log("Error: " + err)
+            } else {
+              console.log("created fam")
+            }
+          })
+
+          console.log(song);
+          return res.json({message: "SongCreated"}) 
+      }
+      return res.json({message: "Done"}) 
+    })
+})
 
 router.get('/user', ensureAuthenticated, function(req, res){
   res.json(req.user);
@@ -141,71 +201,6 @@ passport.use(new SoundCloudStrategy({
 
 
 
-
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
-router.get('/api', function (req, res) {
-  res.send('Song API is running');
-});
-router.get('/api/songsqueued', function (req, res) {
-  return Song.find(function(err, songs){
-  	if(err){return err;}
-
-  	else {res.send(songs)}
-  }).sort({lastQueued: -1})
-});
-
-router.get('/api/songsqueued/top10', function (req, res) {
-  return Song.find(function(err, songs){
-  	if(err){return err;}
-
-  	else {res.send(songs)}
-  }).sort({queueTimes: -1}).limit(10)
-});
-
-router.post('/api/songsqueued', function(req, res){
-    Song.findOneAndUpdate({songId: req.body.songId}, { $inc:{queueTimes: 1}, $currentDate:{lastQueued: true} },
-    	function(err, song){
-        if (err) {
-            return console.log("Error: " + err)
-        }
-        if(song){
-            song.queueTimes += 1;
-
-            song.save(function(err){
-            	if(err){
-            		console.log(err)
-            	} else {
-            		console.log("updated fam")
-            	}
-            });
-        } else {
-
-	        var song = new Song();
-
-	        song.artistName = req.body.artistName;
-	        song.titleName = req.body.titleName;
-	        song.songId = req.body.songId;
-	        song.songImg = req.body.songImg;
-
-
-	        song.save(function(err) {
-	          if (err) {
-	            console.log("Error: " + err)
-	          } else {
-	            console.log("created fam")
-	          }
-	        })
-
-	        console.log(song);
-	        return res.json({message: "SongCreated"}) 
-	    }
-	    return res.json({message: "Done"}) 
-    })
-})
 
 exports.index = function(req, res){
   res.render('index', { title: 'ejs' });
