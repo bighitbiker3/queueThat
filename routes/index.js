@@ -28,13 +28,13 @@ router.get('/login', function(req, res){
   res.render('login', { user: req.user });
 });
 
-function getToken(req, res, next){
-  if(req.isAuthenticated){
-  return req.user.token
-  } else{
-    res.redirect('/login');
-  }
-}
+// function getToken(req, res, next){
+//   if(req.isAuthenticated){
+//   return req.user.token
+//   } else{
+//     res.redirect('/login');
+//   }
+// }
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
