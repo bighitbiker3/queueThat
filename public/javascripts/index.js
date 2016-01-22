@@ -50,7 +50,7 @@ var addToQueue = function(){
         }
         $(this).addClass("animated pulse");
         var songId = this.id;
-        console.log(songId)
+        // console.log(songId)
         var cloned = $(this).clone();
         // cloned.attr("data-songid", songId)
         cloned.attr("id", queueList.length - 1);
@@ -129,7 +129,7 @@ function clearTracksDiv(){
   //SEARCH EVENTS  
   $("input").on("keydown", function search(e) {
     if (e.keyCode == 13) {
-      console.log("pressed")
+      // console.log("pressed")
       getFavorites();
     }
   });
@@ -155,7 +155,7 @@ function clearTracksDiv(){
   function getAPI(apiurl) {
     $("input").addClass("infinite animated pulse")
     $("input").removeClass("form-control-red, form-control-green, intro, introTitle");
-    console.log(apiurl)
+    // console.log(apiurl)
     $.getJSON(apiurl, function(data) {
 
       for (var prop in data.collection) {
@@ -187,7 +187,7 @@ function clearTracksDiv(){
       if (pages.indexOf(data.next_href) == -1) {
         if (data.next_href) {
           pages.push(data.next_href);
-          console.log(pages);
+          // console.log(pages);
         }
       }
       if (pageNumber < pages.length) {
@@ -200,7 +200,7 @@ function clearTracksDiv(){
           $(".trackList").empty();
           getAPI(pages[pageNumber]);
           pageNumber += 1;
-          console.log(pageNumber)
+          // console.log(pageNumber)
           
 
         })
@@ -209,7 +209,7 @@ function clearTracksDiv(){
       $(".prevPage").off("click").on("click", function() {
         if (pageNumber > 0) {
 
-          console.log(pageNumber)
+          // console.log(pageNumber)
           titleList.length = 0;
           artistList.length = 0;
           imgList.length = 0;
@@ -297,7 +297,7 @@ function clearTracksDiv(){
         }
       })
       queueList.splice(deletedId, 1);
-      console.log(queueList);
+      // console.log(queueList);
       removeFromQueue(deletedId)
 
     })
@@ -334,11 +334,11 @@ function clearTracksDiv(){
       $("#" + moveUpId).attr("id", moveUpId - 1);
       $("#changingfam").attr("id", moveUpId);
       
-      console.log("moveupClicked")
-      console.log(moveUpId)
-      console.log(queueList)
+      // console.log("moveupClicked")
+      // console.log(moveUpId)
+      // console.log(queueList)
       arrayMoveUp(queueList, moveUpId)
-      console.log(queueList)
+      // console.log(queueList)
       hideOrShowArrows(currentIndex)
   
       }
@@ -356,10 +356,10 @@ function clearTracksDiv(){
         $("#" + moveDownId).attr("id", moveDownId + 1);
         $("#changingfam").attr("id", moveDownId);
         
-        console.log("moveDownClicked")
-        console.log(queueList);
+        // console.log("moveDownClicked")
+        // console.log(queueList);
         arrayMoveDown(queueList, moveDownId)
-        console.log(queueList);
+        // console.log(queueList);
         hideOrShowArrows(currentIndex)
         
       }
@@ -372,9 +372,9 @@ function hideOrShowArrows(index){
   var hiddenId = parseInt($(".queueListDiv .queueTrack").first().attr("id"), 10);
   var lastId = parseInt($(".queueListDiv .queueTrack").last().attr("id"), 10);
   $("#" + lastId + " .fa-arrow-down").hide()
-  console.log("hiddenId = " + hiddenId + currentIndex)
+  // console.log("hiddenId = " + hiddenId + currentIndex)
     if(index == hiddenId){
-      console.log("true son")
+      // console.log("true son")
       $("#" + hiddenId + " .soundMove").hide();
       $("#" + (hiddenId + 1) + " .fa-arrow-up").hide();
       $("#" + (hiddenId + 1) + " .fa-arrow-down").show();
@@ -399,7 +399,7 @@ $('.connectSoundcloud').off('click').on('click', function(){
   var pollTimer = setInterval(function(){
     if(win.closed !== false){
       clearInterval(pollTimer);
-      console.log('running check for user')
+      // console.log('running check for user')
       $.getJSON('/user', function(data){
         var subSection = 'favorites';
         var username = data.permalink;
@@ -412,7 +412,7 @@ $('.connectSoundcloud').off('click').on('click', function(){
 })
 
 function checkForSession(){
-  console.log('checking for user')
+  // console.log('checking for user')
   $.ajax({
     url: '/user', 
     dataType: 'json',
@@ -425,7 +425,7 @@ function checkForSession(){
         $('.connectSoundcloud').addClass('chosenButtonSoundcloud').text('We Connected, Fam')
       },
     error: function(data){
-      console.log('error')
+      // console.log('error')
     }
   })
 } 
@@ -439,7 +439,7 @@ var strWindowFeatures = "width=420,height=230,resizable,scrollbars=yes,status=1"
 function allowLike(){
   $('.likeSound').off('click').on('click', function(){
 
-    console.log('clicked like');
+    // console.log('clicked like');
     thisDiv = $(this);
     $.getJSON('/user', function(data){
       
@@ -451,14 +451,14 @@ function allowLike(){
             type: 'PUT',
             success: function(result) {
               thisDiv.closest('.likeSound').addClass('soundLiked');
-                console.log('u liked' + songId)
+                // console.log('u liked' + songId)
             },
             error: function(){
               windowObjectReference = window.open("/auth/soundcloud", "SC_Window", strWindowFeatures);
             } 
         });
     }).error(function(){
-      console.log('getJSON error');
+      // console.log('getJSON error');
       windowObjectReference = window.open("/auth/soundcloud", "SC_Window", strWindowFeatures);
     });
   })
@@ -472,7 +472,7 @@ function allowLike(){
     $(".backward").off("click").on("click", playPrevious);
     $(document).on("keydown", function(spc) {
       if (spc.keyCode == 32) {
-        console.log("pressed space")
+        // console.log("pressed space")
         togglePlay();
       }
     })
@@ -513,7 +513,7 @@ function allowLike(){
   function getRandom(randomAPIURL) {
     $.getJSON(randomAPIURL, function(data) {
       var mixesOkay = $("#mixesOkay").is(":checked");
-      console.log(mixesOkay)
+      // console.log(mixesOkay)
       if(mixesOkay){durationLimit = 100000000}
       else if(!mixesOkay){durationLimit = 480000}
       for (var prop in data.collection) {
@@ -525,9 +525,9 @@ function allowLike(){
         if (prop == 150 && randomTitleList.length < 20) {
 
           getRandom(data.next_href)
-          console.log(data.next_href)
-          console.log(randomTitleList)
-          console.log(randomTitleList.length)
+          // console.log(data.next_href)
+          // console.log(randomTitleList)
+          // console.log(randomTitleList.length)
         }
 
         if (data.collection[prop].likes_count > 100 && data.collection[prop].duration > durationMin && data.collection[prop].duration < durationLimit) {
@@ -585,9 +585,9 @@ function allowLike(){
     randomAPIURL = "http://api.soundcloud.com/tracks?genres=" + genre + "&created_at=last_year&limit=200&offset=" + offset + "&client_id=" + clientID + "&linked_partitioning=1";
     getRandom(randomAPIURL);
 
-    console.log(randomTitleList.length);
-    console.log(randomTitleList)
-    console.log(randomAPIURL)
+    // console.log(randomTitleList.length);
+    // console.log(randomTitleList)
+    // console.log(randomAPIURL)
   });
 
 
@@ -652,7 +652,7 @@ socket.on('song send', function(song){
 });
 socket.on('artist send', function(artist){
   if($('#artistFeedName').html() == artist){
-    console.log("artist in there")
+    // console.log("artist in there")
     return;
   }
   else{
@@ -671,7 +671,7 @@ socket.on('artist send', function(artist){
 });
 function getAristFromFeed(){
   $("#artistFeedName").on("click", function(){
-    console.log("artistFeed clicked")
+    // console.log("artistFeed clicked")
     var username = $(this).text();
     $("input[name=userSearch]:visible").val(username)
     clearTracksDiv();
