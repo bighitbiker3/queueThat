@@ -13,7 +13,7 @@ $(document).ready(function() {
   var currentIndex = 0;
   var username = "";
   var subSection = "";
-  var clientID = "a6595fb89abff0688302e47c4d1e9f7a";
+  var clientID = "819c776ce6c1d80e0b0f7c04f19ffdb5";
   var limit = "&limit=200";
   var apiurl = "";
   var pages = [];
@@ -81,7 +81,7 @@ setInterval(addToQueue, 1000);
   //START SC 
 
   SC.initialize({
-    client_id: 'a6595fb89abff0688302e47c4d1e9f7a'
+    client_id: '819c776ce6c1d80e0b0f7c04f19ffdb5'
 
   });
 
@@ -444,7 +444,7 @@ function allowLike(){
       songId = thisDiv.data("songid");
 
       $.ajax({
-            url: 'https://api.soundcloud.com/me/favorites/' + songId + '?oauth_token=' + token + '&callback=jsonpResponse',
+            url: 'https://api.soundcloud.com/me/favorites/' + songId + '?oauth_token=' + token,
             type: 'PUT',
             success: function(result) {
               thisDiv.closest('.likeSound').addClass('soundLiked');

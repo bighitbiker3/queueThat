@@ -5,8 +5,8 @@ var passport = require('passport');
 var SoundCloudStrategy = require('passport-soundcloud').Strategy;
 var User = require('../models/user');
 
-var SOUNDCLOUD_CLIENT_ID = 'a6595fb89abff0688302e47c4d1e9f7a'
-var SOUNDCLOUD_CLIENT_SECRET = '0129ad1775accc4be2c3dd9feea89e1a';
+var SOUNDCLOUD_CLIENT_ID = '819c776ce6c1d80e0b0f7c04f19ffdb5'
+var SOUNDCLOUD_CLIENT_SECRET = '8810c79a556f417bf050ba8c1472a108';
 
 //SC Try
 
@@ -28,13 +28,13 @@ router.get('/login', function(req, res){
   res.render('login', { user: req.user });
 });
 
-// function getToken(req, res, next){
-//   if(req.isAuthenticated){
-//   return req.user.token
-//   } else{
-//     res.redirect('/login');
-//   }
-// }
+function getToken(req, res, next){
+  if(req.isAuthenticated){
+  return req.user.token
+  } else{
+    res.redirect('/login');
+  }
+}
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
@@ -61,7 +61,7 @@ router.get('/auth/soundcloud',
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 router.get('/auth/soundcloud/callback', 
-  passport.authenticate('soundcloud', { failureRedirect: '/' }),
+  passport.authenticate('soundcloud', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/after-auth.html');
   });
