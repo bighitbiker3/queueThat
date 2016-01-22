@@ -41,6 +41,7 @@ router.post('/api/songsqueued', function(req, res){
         }
         if(song){
             song.queueTimes += 1;
+            song.duration = req.body.duration;
 
             song.save(function(err){
               if(err){
