@@ -612,14 +612,7 @@ function clearTop10(){
 
 
 
-//TOP10 BUTTON
-$('#top10Button').off('click').on('click', function(){
 
-  $('#top10Tracks').show();
-  $('#random20Tracks').hide();
-  $('random20Button').removeClass("chosenButton");
-  $('#queueFeedTracks').hide();
-  $('#feedButton').removeClass("chosenButton");
 
   $.getJSON('/api/songsqueued/top10', function(data, listTop10) {
     clearTop10();
@@ -679,9 +672,14 @@ function getAristFromFeed(){
   })
 };
 //TOP10 BUTTON
-$("#top10Button").off('click').on('click', function(){
-  $('#random20Button').removeClass('chosenButton');
-})
+$('#top10Button').off('click').on('click', function(){
+
+  $('#top10Tracks').show();
+  $('#random20Tracks').hide();
+  $('#random20Button').removeClass("chosenButton");
+  $('#queueFeedTracks').hide();
+  $('#feedButton').removeClass("chosenButton");
+
 //FEED BUTTON
 $("#feedButton").off("click").on("click", function(){
   $('#top10Tracks').hide();
