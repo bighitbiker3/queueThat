@@ -30,7 +30,7 @@ var addToQueue = function(){
           "titleName": thisDiv.find(".titleName").text(),
           "songId": parseInt(thisDiv.attr('id'), 10),
           "songImg": thisDiv.children('img').attr('src'),
-          "duration": thisDiv.find('.duration').text() 
+          "duration": thisDiv.find('.duration').text()
         });
 
         //API Post Function
@@ -63,7 +63,7 @@ var addToQueue = function(){
         moveItDown();
         hideOrShowArrows(currentIndex)
         allowLike();
-        
+
       });
 
 };
@@ -81,7 +81,7 @@ setInterval(addToQueue, 1000);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
-  //START SC 
+  //START SC
 
   SC.initialize({
     client_id: '819c776ce6c1d80e0b0f7c04f19ffdb5'
@@ -97,7 +97,7 @@ setInterval(addToQueue, 1000);
 //Socket Emit for ArtistFeed
 function sendArtistFeed(username){
   socket.emit('artist send', username);
-  return false;  
+  return false;
 
 }
 
@@ -116,7 +116,7 @@ function clearTracksDiv(){
     username = $("input[name=userSearch]:visible").val();
     subSection = "favorites";
     getAPIURL(username, subSection);
-    
+
   }
 
   function getTracks() {
@@ -126,7 +126,7 @@ function clearTracksDiv(){
     getAPIURL(username, subSection);
   }
 
-  //SEARCH EVENTS  
+  //SEARCH EVENTS
   $("input").on("keydown", function search(e) {
     if (e.keyCode == 13) {
       // console.log("pressed")
@@ -151,7 +151,7 @@ function clearTracksDiv(){
   $(".getFavorites:visible").off("click").on("click", getFavorites);
   $(".getTracks:visible").off("click").on("click", getTracks);
   $(".clearQueue:visible").off("click").on("click", clearQueue);
-  
+
   function getAPI(apiurl) {
     $("input").addClass("infinite animated pulse")
     $("input").removeClass("form-control-red, form-control-green, intro, introTitle");
@@ -178,7 +178,7 @@ function clearTracksDiv(){
         if (titleList[i].length == maxLength) {
           titleList[i] += "...";
         }
-        
+
         $("<div class='track' id='" + idList[i] + "'><img class='imgclass' src='" + imgList[i] + "'/>" + "<p class='artistName'>" + artistList[i] + "</p>" + "<br><h1 class='titleName'>" + titleList[i] + "</h1><br><p class='duration'>" + duration(durationList[i]) + "</p></div>").appendTo(".trackList");
       };
 
@@ -201,7 +201,7 @@ function clearTracksDiv(){
           getAPI(pages[pageNumber]);
           pageNumber += 1;
           // console.log(pageNumber)
-          
+
 
         })
       }
@@ -234,12 +234,12 @@ function clearTracksDiv(){
         var username = $("input[name=userSearch]:visible").val();
         sendArtistFeed(username);
       });
-    
+
   };
 
 
-  
-//START WIDGET  
+
+//START WIDGET
   var iframe = document.querySelector('iframe.player');
   var sc = SC.Widget(iframe);
 
@@ -277,12 +277,12 @@ function clearTracksDiv(){
 
     var nextIndex = currentIndex + 1;
     playTrack(nextIndex);
-    
+
   }
 
   function removeFromQueue(index) {
     $("#" + (index)).remove()
-    
+
 
   }
 
@@ -320,27 +320,27 @@ function clearTracksDiv(){
     arr.splice(fromIndex - 1, 0, element)
   }
   function moveItUp() {
-    
+
     $(".moveUp").off("click").on("click", function() {
       var moveUpId = parseInt($(this).parents("div").eq(1).attr("id"), 10);
       if(moveUpId <= currentIndex + 1){
-        $(this).toggleClass("animated shake"); 
+        $(this).toggleClass("animated shake");
       }
       else{
       $("#" + moveUpId).insertBefore("#" + (moveUpId - 1))
       //Little hack to swap ID's of tracks on move
       $("#" + (moveUpId - 1)).attr("id", "changingfam");
-    
+
       $("#" + moveUpId).attr("id", moveUpId - 1);
       $("#changingfam").attr("id", moveUpId);
-      
+
       // console.log("moveupClicked")
       // console.log(moveUpId)
       // console.log(queueList)
       arrayMoveUp(queueList, moveUpId)
       // console.log(queueList)
       hideOrShowArrows(currentIndex)
-  
+
       }
     })
   }
@@ -348,25 +348,25 @@ function clearTracksDiv(){
     $(".moveDown").off("click").on("click", function() {
       var moveDownId = parseInt($(this).parents("div").eq(1).attr("id"), 10);
       if(moveDownId == currentIndex || moveDownId == queueList.length -1){
-        $(this).toggleClass("animated shake");    
+        $(this).toggleClass("animated shake");
       }
       else{
         $("#" + moveDownId).insertAfter("#" + (moveDownId + 1));
         $("#" + (moveDownId + 1)).attr("id", "changingfam")
         $("#" + moveDownId).attr("id", moveDownId + 1);
         $("#changingfam").attr("id", moveDownId);
-        
+
         // console.log("moveDownClicked")
         // console.log(queueList);
         arrayMoveDown(queueList, moveDownId)
         // console.log(queueList);
         hideOrShowArrows(currentIndex)
-        
+
       }
     })
   }
 
- 
+
 //Condition to remove arrows from song playing
 function hideOrShowArrows(index){
   var hiddenId = parseInt($(".queueListDiv .queueTrack").first().attr("id"), 10);
@@ -378,9 +378,9 @@ function hideOrShowArrows(index){
       $("#" + hiddenId + " .soundMove").hide();
       $("#" + (hiddenId + 1) + " .fa-arrow-up").hide();
       $("#" + (hiddenId + 1) + " .fa-arrow-down").show();
-    } 
+    }
     if((hiddenId + 1) == lastId){
-     $("#" + (hiddenId + 1) + " .fa-arrow-down").hide(); 
+     $("#" + (hiddenId + 1) + " .fa-arrow-down").hide();
     }
   $(".queueListDiv .queueTrack").each(function(){
     var otherId = parseInt($(this).attr("id"))
@@ -393,7 +393,7 @@ function hideOrShowArrows(index){
 }
   hideOrShowArrows(currentIndex)
 
-//SC Connect 
+//SC Connect
 $('.connectSoundcloud').off('click').on('click', function(){
   var win = window.open("/auth/soundcloud", "SC_Window", strWindowFeatures);
   var pollTimer = setInterval(function(){
@@ -414,7 +414,7 @@ $('.connectSoundcloud').off('click').on('click', function(){
 function checkForSession(){
   // console.log('checking for user')
   $.ajax({
-    url: '/user', 
+    url: '/user',
     dataType: 'json',
     success: function(data){
         var subSection = 'favorites';
@@ -428,7 +428,7 @@ function checkForSession(){
       // console.log('error')
     }
   })
-} 
+}
 checkForSession();
 
 //SC Liking
@@ -442,7 +442,7 @@ function allowLike(){
     // console.log('clicked like');
     thisDiv = $(this);
     $.getJSON('/user', function(data){
-      
+
       var token = data.token;
       songId = thisDiv.data("songid");
 
@@ -455,7 +455,7 @@ function allowLike(){
             },
             error: function(){
               windowObjectReference = window.open("/auth/soundcloud", "SC_Window", strWindowFeatures);
-            } 
+            }
         });
     }).error(function(){
       // console.log('getJSON error');
@@ -463,7 +463,7 @@ function allowLike(){
     });
   })
 }
-     
+
   sc.bind(SC.Widget.Events.READY, function() {
 
     $(".play").off("click").on("click", play);
@@ -477,7 +477,7 @@ function allowLike(){
       }
     })
     sc.bind(SC.Widget.Events.FINISH, onTrackFinished)
-    
+
 //Condition to Clear All if last song finishes
   sc.bind(SC.Widget.Events.FINISH, function(){
     if(currentIndex == queueList.length){
@@ -486,7 +486,7 @@ function allowLike(){
     currentIndex = 0;
   }
   })
-   
+
   });
   //RANDOM 20 CODEZ
   var randomTitleList = [];
@@ -509,7 +509,7 @@ function allowLike(){
   //Random for Offset
   //Do shit here time to party
 
-  
+
   function getRandom(randomAPIURL) {
     $.getJSON(randomAPIURL, function(data) {
       var mixesOkay = $("#mixesOkay").is(":checked");
@@ -517,8 +517,8 @@ function allowLike(){
       if(mixesOkay){durationLimit = 100000000}
       else if(!mixesOkay){durationLimit = 480000}
       for (var prop in data.collection) {
-      
-        
+
+
         if (randomTitleList.length == 20) {
           break;
         }
@@ -548,9 +548,9 @@ function allowLike(){
         }
 
         queueList.push(randomIdList[i]);
-        
+
         $("<div class='track' id='" + (queueList.length - 1) + "'><span class = 'soundHover'><div class='soundMove'><i class='moveUp fa fa-arrow-up'></i><i class='moveDown fa fa-arrow-down'></div></i><span class='deleteQueue'><i class='fa fa-times'></i></span><span data-songid='" + randomIdList[i] + "' class='likeSound'><i class='fa fa-heart-o'></i></span></span><img src='" + randomImgList[i] + "'/>" + "<p class='artistName'>" + randomArtistList[i] + "</p>" + "<br><a href='" + randomPermalinkList[i] + "' target = '_blank'><h1 class='titleName'>" + randomTitleList[i] + "</h1></a><br><p class='duration'>" + duration(randomDurationList[i]) + "</p></div>").appendTo(".queueListDiv").removeClass('track').addClass('queueTrack')
-        
+
 
         console.log(queueList)
       }
@@ -562,10 +562,10 @@ function allowLike(){
         moveItDown();
         hideOrShowArrows(currentIndex)
         allowLike();
- 
+
     })
   }
-  
+
   //Clear Arrays for new button push
   function clearRandomArrays(){
     randomTitleList.length = 0;
@@ -612,18 +612,18 @@ function clearTop10(){
 
 
 
-//TOP10 BUTTON 
+//TOP10 BUTTON
 $('#top10Button').off('click').on('click', function(){
-  
+
   $('#top10Tracks').show();
   $('#random20Tracks').hide();
-  $('random20Button').removeClass("chosenButton"); 
+  $('random20Button').removeClass("chosenButton");
   $('#queueFeedTracks').hide();
   $('#feedButton').removeClass("chosenButton");
 
   $.getJSON('/api/songsqueued/top10', function(data, listTop10) {
     clearTop10();
-    
+
     for (var prop in data){
       top10TitleList.push(data[prop].titleName);
       top10ArtistList.push(data[prop].artistName);
@@ -640,11 +640,11 @@ $('#top10Button').off('click').on('click', function(){
         $("<div class='track' id='" + top10IdList[i] + "'><img class='imgclass' src='" + top10ImgList[i] + "'/>" + "<p class='artistName'>" + top10ArtistList[i] + "</p>" + "<br><h1 class='titleName'>" + top10TitleList[i] + "</h1><p class='top10Rating'>Queued: " + top10RatingList[i] + " times</p><br><p class='duration'>" + top10DurationList[i] + "</p></div>").appendTo("#top10Tracks");
       };
       $('#top10Button').addClass("chosenButton")
-      
+
     }).error(function(){
       console.log("getJSON error")
-    }); 
-});  
+    });
+});
 
 //FEED
 socket.on('song send', function(song){
@@ -663,11 +663,11 @@ socket.on('artist send', function(artist){
     $('.artistFeed h1').addClass('animated fadeOut');
     $('.artistFeed h1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
       $('.artistFeed h1').remove();
-      $('.artistFeed').append($('<h1 id="artistFeedName" class = "animated fadeIn">').text(artist)) 
+      $('.artistFeed').append($('<h1 id="artistFeedName" class = "animated fadeIn">').text(artist))
       getAristFromFeed();
     });
   }
-  
+
 });
 function getAristFromFeed(){
   $("#artistFeedName").on("click", function(){
@@ -678,12 +678,15 @@ function getAristFromFeed(){
     getAPIURL(username, "favorites");
   })
 };
-
+//TOP10 BUTTON
+$("#top10Button").off('click').on('click', function(){
+  $('#random20Button').removeClass('chosenButton');
+})
 //FEED BUTTON
 $("#feedButton").off("click").on("click", function(){
   $('#top10Tracks').hide();
   $('#top10Button').removeClass("chosenButton");
-  $('#random20Tracks').hide(); 
+  $('#random20Tracks').hide();
   $('#random20Button').removeClass("chosenButton");
   $('#queueFeedTracks').show();
   $('#feedButton').addClass("chosenButton");
@@ -696,14 +699,14 @@ $('#random20Button').off("click").on("click", function(){
   $('#feedButton').removeClass("chosenButton");
   $('#top10Button').removeClass("chosenButton");
   $('#top10Tracks').hide();
-  $('#random20Tracks').show(); 
+  $('#random20Tracks').show();
   $('#queueFeedTracks').hide();
   $('#random20Button').addClass("chosenButton");
 
 });
 
 //HIDE ALL CONTENTS ON LOAD
-  $('#random20Tracks').hide(); 
+  $('#random20Tracks').hide();
   $('#queueFeedTracks').hide();
   $('#top10Tracks').hide();
 
