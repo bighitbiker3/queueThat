@@ -13,6 +13,9 @@ var SOUNDCLOUD_CLIENT_SECRET = '8810c79a556f417bf050ba8c1472a108';
 router.get('/', function(req, res){
   res.render('index', { user: req.user });
 });
+router.get('/privacy', function(req, res){
+  res.render('privacy', { user: req.user });
+});
 
 router.get('/api', function (req, res) {
   res.send('Song API is running');
@@ -69,9 +72,9 @@ router.post('/api/songsqueued', function(req, res){
           })
 
           console.log(song);
-          return res.json({message: "SongCreated"}) 
+          return res.json({message: "SongCreated"})
       }
-      return res.json({message: "Done"}) 
+      return res.json({message: "Done"})
     })
 })
 
@@ -120,7 +123,7 @@ router.get('/auth/soundcloud',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-router.get('/auth/soundcloud/callback', 
+router.get('/auth/soundcloud/callback',
   passport.authenticate('soundcloud', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/after-auth.html');
@@ -176,13 +179,13 @@ passport.use(new SoundCloudStrategy({
                     var user            = new User();
 
                     // set all of the facebook information in our user model
-                    user.id    = profile.id; // set the users facebook id                   
-                    user.token = accessToken; // we will save the token that facebook provides to the user                    
+                    user.id    = profile.id; // set the users facebook id
+                    user.token = accessToken; // we will save the token that facebook provides to the user
                     user.created  = Date.now(); // look at the passport user profile to see how names are returned
                     user.rToken = refreshToken;
                     user.displayName = profile.displayName;
                     user.permalink = profile.permalink;
-                    
+
                     // save our user to the database
                     user.save(function(err) {
                         if (err)
