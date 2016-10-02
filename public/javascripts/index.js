@@ -640,7 +640,7 @@ function clearTop10(){
     });
 
 //FEED
-var socket = io('http://localhost:8000');
+var socket = io(window.location.protocol + '//' + window.location.host);
 socket.on('song send', function(song){
   $("<div class='track' id='" + song.songId + "'><img class='imgclass' src='" + song.songImg + "'/>" + "<p class='artistName'>" + song.artistName + "</p>" + "<br><h1 class='titleName'>" + song.titleName + "</h1><br><p class='duration'>" + song.duration + "</p></div>").prependTo("#queueFeedTracks");
 });
