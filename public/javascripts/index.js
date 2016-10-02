@@ -19,7 +19,7 @@ $(document).ready(function() {
   var pages = [];
   var pageNumber = 0;
   var playing = false;
-  var socket = io();
+
 
 
 var addToQueue = function(){
@@ -616,6 +616,7 @@ function clearTop10(){
 
   $.getJSON('/api/songsqueued/top10', function(data, listTop10) {
     clearTop10();
+    console.log(data);
 
     for (var prop in data){
       top10TitleList.push(data[prop].titleName);
@@ -637,12 +638,13 @@ function clearTop10(){
     }).error(function(){
       console.log("getJSON error")
     });
-});
 
 //FEED
+var socket = io('http://localhost:8000');
 socket.on('song send', function(song){
   $("<div class='track' id='" + song.songId + "'><img class='imgclass' src='" + song.songImg + "'/>" + "<p class='artistName'>" + song.artistName + "</p>" + "<br><h1 class='titleName'>" + song.titleName + "</h1><br><p class='duration'>" + song.duration + "</p></div>").prependTo("#queueFeedTracks");
 });
+
 socket.on('artist send', function(artist){
   if($('#artistFeedName').html() == artist){
     // console.log("artist in there")
@@ -662,6 +664,8 @@ socket.on('artist send', function(artist){
   }
 
 });
+
+
 function getAristFromFeed(){
   $("#artistFeedName").on("click", function(){
     // console.log("artistFeed clicked")
@@ -672,14 +676,18 @@ function getAristFromFeed(){
   })
 };
 //TOP10 BUTTON
-$('#top10Button').off('click').on('click', function(){
+//HIDE ALL CONTENTS ON LOAD
+  $('#random20Tracks').hide();
+  $('#queueFeedTracks').hide();
+  $('#top10Tracks').show();
+$('#top10Button').off("click").on("click", function(){
 
   $('#top10Tracks').show();
   $('#random20Tracks').hide();
   $('#random20Button').removeClass("chosenButton");
   $('#queueFeedTracks').hide();
   $('#feedButton').removeClass("chosenButton");
-
+});
 //FEED BUTTON
 $("#feedButton").off("click").on("click", function(){
   $('#top10Tracks').hide();
@@ -693,7 +701,7 @@ $("#feedButton").off("click").on("click", function(){
 
 //RANDOM 20 FEED BUTTON
 $('#random20Button').off("click").on("click", function(){
-
+  console.log('CLICKEEEEDDDDD');
   $('#feedButton').removeClass("chosenButton");
   $('#top10Button').removeClass("chosenButton");
   $('#top10Tracks').hide();
@@ -703,12 +711,8 @@ $('#random20Button').off("click").on("click", function(){
 
 });
 
-//HIDE ALL CONTENTS ON LOAD
-  $('#random20Tracks').hide();
-  $('#queueFeedTracks').hide();
-  $('#top10Tracks').hide();
-
 
 
 //END DOC READY
+
 });

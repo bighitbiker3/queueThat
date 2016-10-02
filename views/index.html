@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>SC Queue Working on Desktop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link rel="stylesheet" href="/stylesheets/normalize.css">
 
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
@@ -13,7 +13,7 @@
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Raleway:200,300,100'>
     <link rel="stylesheet" href="/stylesheets/style.css">
 
-    
+
   </head>
 
   <body>
@@ -69,7 +69,7 @@
   <button class="btn getTracks" id="tracks">Tracks :)</button>
   <button class="btn getFavorites" id="favorites">Favorites :)</button>
   <button class="btn connectSoundcloud">Connect w/ SC :)</button>
-  
+
 </div>
 <div class="col-md-4 artistFeed visible-md visible-lg">
   <h3 id="artistFeedName">Live Searches</h3><h1>
@@ -99,7 +99,7 @@
       </div>
       <form>
         <div class="checkbox hideThing">
-          <input type="checkbox" id="mixesOkay"> <p>Mixes are okay</p></input>     
+          <input type="checkbox" id="mixesOkay"> <p>Mixes are okay</p></input>
         </div>
       </form>
     </div>
@@ -108,7 +108,7 @@
       <h1>Queue (It's Pretty Lit)</h1><button class="btn clearQueue" id="clearQueue">X</button>
             <span>
     </div>
-    
+
   </div>
   <div id="trackList" class="trackList col-md-4">
     <h1 class="introTitle">Directions</h1>
@@ -119,7 +119,7 @@
       1. Put the end of any Soundcloud permalink you want in the search box above. For example, if the artist is http://soundcloud.com/duvetcover you'd put duvetcover in the search.
       <br>
       <br>
-      2. Pressing enter brings up that artists <strong>favorited</strong> tracks. If you want the tracks they've posted, click the Tracks :) button.  
+      2. Pressing enter brings up that artists <strong>favorited</strong> tracks. If you want the tracks they've posted, click the Tracks :) button.
       <br>
       <br>
       3. If you put in a valid search, the box will turn green and you won't see this anymore. Instead you'll see a list of tracks. It shows 200 results. If there are more, hit Next Page.
@@ -131,7 +131,7 @@
       Made with Coffee and Curry by Elliott McNary at his battle station.
     </p>
     <img class="introImg img-responsive" src="https://dl.dropboxusercontent.com/s/46xjg5p88xxq5f6/fat_me.JPG?dl=0"/>
-      
+
     <!--<div class='track'>
       <img src="https://i1.sndcdn.com/artworks-000134901706-qotldu-large.jpg" />
       <p class='artistName'>DJ Carnage</p>
@@ -155,7 +155,7 @@
       </div>
     <iframe class="player hideThing" src="//w.soundcloud.com/player/?url=//soundcloud.com/"></iframe>
 
-    
+
       <div id="top10Tracks" class="middleColumn col-md-4">
       </div>
       <div id="queueFeedTracks" class="middleColumn col-md-4" ng-controller="FeedCtrl">
@@ -200,17 +200,17 @@
 
           </div>
       </div>
-    
+
     <div id="queueList" class="queueListDiv col-md-4">
-      
+
           <!-- <div class='track' id='test'>
-            
+
             <span class="soundHover">
             <div class="soundMove">
             <i class="moveUp fa fa-arrow-up"></i>
-            <i class="moveDown fa fa-arrow-down"></i> 
+            <i class="moveDown fa fa-arrow-down"></i>
               </div>
-                      <span class="deleteQueue">  
+                      <span class="deleteQueue">
             <i class="fa fa-times"></i>
           </span>
           <span class='likeSound'><i class='fa fa-heart-o'></i></span>
@@ -230,21 +230,19 @@
 </div>
 
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
-    <script type="text/javascript" src="/javascripts/index.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="/javascripts/angularApp.js"></script>
-    <script src='https://connect.soundcloud.com/sdk/sdk-3.0.0.js'></script>
-    <script src='https://w.soundcloud.com/player/api.js'></script>
-    <script src='http://www.waveformjs.org/waveform.js'></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-    <script src="/socket.io/socket.io.js"></script>
-    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js' defer></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js' defer></script>
+    <script src='https://connect.soundcloud.com/sdk/sdk-3.0.0.js' defer></script>
+    <script src='https://w.soundcloud.com/player/api.js' defer></script>
+    <script src='http://www.waveformjs.org/waveform.js' defer></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js' defer></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script type="text/javascript" src="/javascripts/index.js" defer></script>
 
 
-    
-    
-    
+
+
+
+
   </body>
 </html>
